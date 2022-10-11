@@ -1,7 +1,5 @@
 import React from 'react';
-import { Socket } from 'socket.io-client';
 import { useSocket } from '../utils/socketsContext';
-import { useFunc } from '../utils/useFunc';
 
 type JoinRoomProps = {
   styles: any;
