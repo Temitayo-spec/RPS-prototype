@@ -58,8 +58,8 @@ type SocketContextType = {
   playerTurn: number;
   setPlayerTurn: (playerTurn: number) => void;
 };
-// const socket = io('https://rps-prototype-be-production.up.railway.app/');
-const socket = io('http://localhost:5000');
+const socket = io('https://rps-prototype-be-production.up.railway.app/');
+// const socket = io('http://localhost:5000');
 
 const SocketContext = createContext<SocketContextType>({
   socket: socket,
