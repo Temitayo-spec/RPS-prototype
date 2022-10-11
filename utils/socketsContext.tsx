@@ -56,7 +56,7 @@ type SocketContextType = {
   removeChoice: (choice: string) => void;
   checkForWinner: (message: string) => void;
 };
-const socket = io('http://localhost:5000');
+const socket = io('https://rps-prototype-be-production.up.railway.app/');
 
 const SocketContext = createContext<SocketContextType>({
   socket: socket,
