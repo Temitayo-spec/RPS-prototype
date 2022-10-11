@@ -9,7 +9,7 @@ import { CreateJoin, CreateRoom, JoinRoom, RoomDetails } from '../components';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
-// const socket = io('https://rps-prototype-be-production.up.railway.app/');
+const socket = io('https://rps-prototype-be-production.up.railway.app/');
 // const socket = io('http://localhost:5000')
 const Home: NextPage = () => {
   const {
