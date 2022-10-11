@@ -58,7 +58,8 @@ type SocketContextType = {
   playerTurn: number;
   setPlayerTurn: (playerTurn: number) => void;
 };
-const socket = io('https://rps-prototype-be-production.up.railway.app/');
+// const socket = io('https://rps-prototype-be-production.up.railway.app/');
+const socket = io('http://localhost:5000');
 
 const SocketContext = createContext<SocketContextType>({
   socket: socket,
@@ -107,7 +108,7 @@ const SocketContext = createContext<SocketContextType>({
   displayScore: () => {},
   choose: () => {},
   removeChoice: () => {},
-  checkForWinner: () => { },
+  checkForWinner: () => {},
   playerTurn: 1,
   setPlayerTurn: () => {},
 });
@@ -237,6 +238,17 @@ const SocketsProvider = ({ children }: any) => {
     [playerOneChoice]
   );
 
+  const checkForWhoseTurn = useCallback(
+    (playerId: number) => {
+      if (playerId === 1) {
+        setPlayerTurn(1);
+      } else {
+        setPlayerTurn(2);
+      }
+    },
+    [setPlayerTurn]
+  );
+
   useEffect(() => {
     socket.on('connect', () => {
       console.log('connected');
@@ -285,18 +297,17 @@ const SocketsProvider = ({ children }: any) => {
     });
 
     socket.on('draw', (message) => {
-      setWinner({
-        status: true,
-        message: message,
-      });
+      checkForWinner(message);
     });
 
-    socket.on('player_1_moved', () => {
-      setPlayerTurn(2);
+    socket.on('player_1_made_move', () => {
+      checkForWhoseTurn(2);
+      console.log('player 1 made move');
     });
 
-    socket.on('player_2_moved', () => {
-      setPlayerTurn(1);
+    socket.on('player_2_made_move', () => {
+      checkForWhoseTurn(1);
+      console.log('player 2 made move');
     });
 
     socket.on('player_1_wins', (message) => {
@@ -307,7 +318,7 @@ const SocketsProvider = ({ children }: any) => {
       setPlayerTwoScore(playerTwoScore + 1);
       checkForWinner(message);
     });
-  }, [checkForWinner, displayScore, playerOneScore, playerTwoScore, reset]);
+  }, [checkForWhoseTurn, checkForWinner, displayScore, playerOneScore, playerTwoScore, reset]);
   return (
     <SocketContext.Provider
       value={{

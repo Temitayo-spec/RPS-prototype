@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useState } from 'react';
 import { useSocket } from '../utils/socketsContext';
 
 const Display = ({
@@ -12,7 +11,7 @@ const Display = ({
   playerId,
   roomId,
 }: any): JSX.Element => {
-  const { playerTurn, setPlayerTurn } = useSocket();
+  const { playerTurn } = useSocket();
   const makeMove = (choice: string) => {
     if (canChoose) {
       choose(choice);
