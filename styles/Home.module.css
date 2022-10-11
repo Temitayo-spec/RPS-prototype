@@ -114,6 +114,7 @@
   padding: 0 1rem;
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  outline: none;
 }
 
 .create__room button,
