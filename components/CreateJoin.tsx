@@ -29,6 +29,7 @@ const CreateJoin = ({ styles }: Props) => {
           className={styles.card}
           onClick={() => {
             setOpenJoinRoom(true);
+            setIsCreate(true);
           }}
         >
           <h3>Join Room &rarr;</h3>

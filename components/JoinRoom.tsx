@@ -2,7 +2,7 @@ import React from 'react';
 import { useSocket } from '../utils/socketsContext';
 
 const JoinRoom = ({ styles }: any) => {
-  const { setRoomId, roomId, joinRoom, setOpenJoinRoom, joinRandom } =
+  const { setRoomId, roomId, joinRoom, setOpenJoinRoom, joinRandom, setIsCreate } =
     useSocket();
   return (
     <div className={styles.join__room}>
@@ -12,27 +12,34 @@ const JoinRoom = ({ styles }: any) => {
         value={roomId}
         onChange={(e) => setRoomId(e.target.value)}
       />
+      <div className={styles.btns__ctn}>
+        <button
+          type="button"
+          onClick={() => {
+            joinRoom(roomId);
+            setOpenJoinRoom(false);
+            setIsCreate(true);
+          }}
+        >
+          Join
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setIsCreate(false);
+            setOpenJoinRoom(false);
+          }}
+        >
+          Cancel
+        </button>
+      </div>
       <button
-        type="button"
-        onClick={() => {
-          joinRoom(roomId);
-          setOpenJoinRoom(false);
-        }}
-      >
-        Join
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setOpenJoinRoom(true);
-        }}
-      >
-        Cancel
-      </button>
-      <button
+        className={styles.join__random}
         type="button"
         onClick={() => {
           joinRandom();
+          setOpenJoinRoom(false);
+          setIsCreate(true);
         }}
       >
         Join Random

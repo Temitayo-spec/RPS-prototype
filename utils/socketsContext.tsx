@@ -107,6 +107,7 @@ const SocketContext = createContext<SocketContextType>({
   removeChoice: () => {},
   checkForWinner: () => {},
 });
+
 const SocketsProvider = ({ children }: any) => {
   const [canChoose, setCanChoose] = useState(false);
   const [playerOneConnected, setPlayerOneConnected] = useState(false);

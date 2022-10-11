@@ -6,6 +6,8 @@ import io from 'socket.io-client';
 import Display from '../components/Display';
 import { useSocket } from '../utils/socketsContext';
 import { CreateJoin, CreateRoom, JoinRoom, RoomDetails } from '../components';
+import Image from 'next/image';
+import { useEffect } from 'react';
 
 const socket = io('http://localhost:5000');
 const Home: NextPage = () => {
@@ -27,7 +29,18 @@ const Home: NextPage = () => {
     winner,
     choose,
     isCreate,
+    setError,
+    setIsCreate,
   } = useSocket();
+
+  useEffect(() => {
+    if (error.status) {
+      setTimeout(() => {
+        setError({ status: false, message: '' });
+        setIsCreate(false);
+      }, 3000);
+    }
+  }, [error]);
 
   return (
     <div className={styles.container}>
@@ -38,9 +51,18 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Rock Paper Scissors!</h1>
-        <p className={styles.description}>Get started by creating a room</p>
-        {error.status && <p>{error.message}</p>}
+        <Image
+          src="/rps-logo.png"
+          height={226}
+          width={350}
+          alt="rps-logo"
+          objectFit="contain"
+          priority
+        />
+        {!room && (
+          <p className={styles.description}>Get started by creating a room</p>
+        )}
+        {error.status && <p className={styles.error}>{error.message}</p>}
         {!isCreate && <CreateJoin styles={styles} />}
 
         <RoomDetails styles={styles} />

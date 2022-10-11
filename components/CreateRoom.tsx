@@ -18,24 +18,26 @@ const CreateRoom = ({ styles }: Props) => {
           setRoomId(e.target.value);
         }}
       />
-      <button
-        type="button"
-        onClick={() => {
-          createRoom(roomId);
-          setOpenCreateRoom(false);
-        }}
-      >
-        Create Room
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setOpenCreateRoom(false);
-          setIsCreate(false);
-        }}
-      >
-        Cancel
-      </button>
+      <div className={styles.btns__ctn}>
+        <button
+          type="button"
+          onClick={() => {
+            createRoom(roomId);
+            setOpenCreateRoom(false);
+          }}
+        >
+          Create Room
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setOpenCreateRoom(false);
+            setIsCreate(false);
+          }}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 };
