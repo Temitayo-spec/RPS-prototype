@@ -127,3 +127,7 @@
     filter: invert(1);
   }
 }
+
+.rock__paper__scissors__container__item__image {
+  cursor: pointer;
+}
