@@ -40,15 +40,6 @@
   color: #ccc;
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
 .grid {
   display: flex;
   align-items: center;
@@ -63,11 +54,13 @@
   text-align: left;
   color: inherit;
   text-decoration: none;
-  border: 1px solid #eaeaea;
+  border: 1px solid #ccc;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
   cursor: pointer;
+  color: #fff;
+  background: transparent;
 }
 
 .card:hover,
@@ -80,12 +73,14 @@
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
+  color: #fafafa;
 }
 
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  color: #666;
 }
 
 .logo {
@@ -97,19 +92,6 @@
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
   }
 }
 
@@ -158,13 +140,21 @@
   color: white;
 }
 
+.join__room button:first-child {
+  background: #1e1e1e;
+  color: white;
+  width: 100%;
+  max-width: 400px ;
+  padding: 0 2em;
+}
+
 .join__random {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: #0070f3 !important;
+  background: rgb(18, 158, 18) !important;
 }
 
 .rock__paper__scissors__container__item {
@@ -187,6 +177,12 @@
 .rock__paper__scissors__container__item__image {
   cursor: pointer;
   height: 100%;
+}
+
+.rock__paper__scissors__container h1 {
+  font-size: 3rem;
+  color: #0070f3;
+  margin: 0;
 }
 
 .grid__items {
@@ -258,4 +254,14 @@
   transition: all 0.5s ease;
   text-align: center;
   padding: 1rem;
+}
+
+.turn__msg {
+  color: #7e8b99;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.5s ease;
+  text-align: center;
+  padding: 1rem;
+  margin: 0;
 }

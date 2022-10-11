@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 const Display = ({
   styles,
@@ -10,6 +11,7 @@ const Display = ({
   playerId,
   roomId,
 }: any): JSX.Element => {
+  const [playerTurn, setPlayerTurn] = useState("Player One's Turn");
   const makeMove = (choice: string) => {
     if (canChoose) {
       choose(choice);
@@ -18,6 +20,12 @@ const Display = ({
         myChoice: choice,
         playerId,
       });
+
+      if (playerId === 1) {
+        setPlayerTurn("Player Two's Turn");
+      } else {
+        setPlayerTurn("Player One's Turn");
+      }
     }
   };
 
@@ -32,11 +40,7 @@ const Display = ({
       className={styles.rock__paper__scissors}
     >
       <header className={styles.header}>
-        {connected && connected2 ? (
-          <></>
-        ) : (
-          <h1>Waiting for player 2...</h1>
-        )}
+        {connected && connected2 ? <></> : <h1>Waiting for player 2...</h1>}
         {/* <div className={styles.grid__items}>
           <p>Player 1 is {connected ? 'connected' : 'not connected'}</p>
           <p>Player 2 is {connected2 ? 'connected' : 'not connected'}</p>
@@ -46,6 +50,8 @@ const Display = ({
         <h1>
           {score} - {score2}
         </h1>
+        {connected && connected2 && <p className={styles.turn__msg}>{playerTurn}</p>}
+
         <div className={styles.signs}>
           <div className={styles.rock__paper__scissors__container__item}>
             <Image
