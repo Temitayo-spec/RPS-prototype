@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { useSocket } from '../utils/socketsContext';
 
 const Display = ({
   styles,
@@ -11,7 +12,7 @@ const Display = ({
   playerId,
   roomId,
 }: any): JSX.Element => {
-  const [playerTurn, setPlayerTurn] = useState("Player One's Turn");
+  const { playerTurn, setPlayerTurn } = useSocket();
   const makeMove = (choice: string) => {
     if (canChoose) {
       choose(choice);
@@ -20,12 +21,6 @@ const Display = ({
         myChoice: choice,
         playerId,
       });
-
-      if (playerId === 1) {
-        setPlayerTurn("Player Two's Turn");
-      } else {
-        setPlayerTurn("Player One's Turn");
-      }
     }
   };
 
@@ -50,7 +45,11 @@ const Display = ({
         <h1>
           {score} - {score2}
         </h1>
-        {connected && connected2 && <p className={styles.turn__msg}>{playerTurn}</p>}
+        {connected && connected2 && (
+          <p className={styles.turn__msg}>
+            {playerTurn === playerId ? 'Your turn' : "It's not your turn"}
+          </p>
+        )}
 
         <div className={styles.signs}>
           <div className={styles.rock__paper__scissors__container__item}>

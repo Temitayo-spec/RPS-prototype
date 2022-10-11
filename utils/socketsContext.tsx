@@ -55,6 +55,8 @@ type SocketContextType = {
   choose: (choice: string) => void;
   removeChoice: (choice: string) => void;
   checkForWinner: (message: string) => void;
+  playerTurn: number;
+  setPlayerTurn: (playerTurn: number) => void;
 };
 const socket = io('https://rps-prototype-be-production.up.railway.app/');
 
@@ -105,7 +107,9 @@ const SocketContext = createContext<SocketContextType>({
   displayScore: () => {},
   choose: () => {},
   removeChoice: () => {},
-  checkForWinner: () => {},
+  checkForWinner: () => { },
+  playerTurn: 1,
+  setPlayerTurn: () => {},
 });
 
 const SocketsProvider = ({ children }: any) => {
@@ -130,6 +134,7 @@ const SocketsProvider = ({ children }: any) => {
     status: false,
     message: '',
   });
+  const [playerTurn, setPlayerTurn] = useState(1);
 
   const createRoom = (id: string) => {
     setError({
@@ -286,6 +291,14 @@ const SocketsProvider = ({ children }: any) => {
       });
     });
 
+    socket.on('player_1_moved', () => {
+      setPlayerTurn(2);
+    });
+
+    socket.on('player_2_moved', () => {
+      setPlayerTurn(1);
+    });
+
     socket.on('player_1_wins', (message) => {
       setPlayerOneScore(playerOneScore + 1);
       checkForWinner(message);
@@ -339,6 +352,8 @@ const SocketsProvider = ({ children }: any) => {
         choose,
         removeChoice,
         checkForWinner,
+        playerTurn,
+        setPlayerTurn,
       }}
     >
       {children}
