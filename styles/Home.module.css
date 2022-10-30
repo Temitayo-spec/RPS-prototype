@@ -264,5 +264,5 @@
   transition: all 0.5s ease;
   text-align: center;
   padding: 1rem;
-  margin: 0;
+  margin: 0.5em auto;
 }
